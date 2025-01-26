@@ -6,7 +6,7 @@ services:
     networks:
       - internal
     volumes:
-      - ./:/application:cached
+      - ./:/application
       - ./docker_s/sourcefiles/nginx:/etc/nginx/conf.d
     ports:
       - "${NGINX_PORT}:80"
@@ -24,7 +24,7 @@ services:
     container_name: ${PROJECT_NAME}-php-fpm
     working_dir: /application
     volumes:
-      - ./:/application:cached
+      - ./:/application
       - ./docker_s/sourcefiles/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
     networks:
       - internal
