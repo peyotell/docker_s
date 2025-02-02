@@ -5,14 +5,17 @@ WORKDIR "/application"
 # Updating and installing required packages
 RUN apt-get update && apt-get install -y \
     nano \
-    libzip-dev zip libicu-dev libpq-dev \
-    libfreetype6-dev libjpeg62-turbo-dev libpng-dev
+    libzip-dev zip libicu-dev \
+    libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
+    libpq-dev 
+    # default-mysql-client # mysql 
 
 # Installing Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Installing PHP extensions
 RUN docker-php-ext-install zip intl pdo_pgsql pgsql gd
+# RUN docker-php-ext-install zip intl pdo_mysql mysqli gd
 
 # Setting up GD
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
